@@ -14,10 +14,10 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={
+        <Route path="/quran-react2" element={
           <>
             <Hero onExploreClick={scrollToQuotes} />
-            
+
             <div ref={quranListRef}>
               <QuranList />
             </div>
