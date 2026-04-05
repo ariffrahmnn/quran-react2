@@ -12,7 +12,7 @@ export default function App() {
     quranListRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={
           <>
@@ -26,6 +26,6 @@ export default function App() {
         <Route path="/surat/:nomor" element={<SurahDetail />} />
       </Routes>
       <Footer />
-    </HashRouter>
+    </BrowserRouter>
   );
 }
