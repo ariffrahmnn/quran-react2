@@ -1,44 +1,45 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
+import { getDetailSurah } from '../services/surahService';
 import AudioPlayer from '../components/AudioPlayer';
 import AyahAudio from '../components/AyahAudio';
-import { getDetailSurah } from '../services/surahService';
 
 export default function SurahDetail() {
-  const { nomor } = useParams();
+  const { nomor } = useParams(); // Menangkap :nomor dari URL
   const [detail, setDetail] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // 🔥 state untuk pilih qari
+  // 🔥 TAMBAHAN (pilih qari)
   const [qari, setQari] = useState("05");
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchDetail = async () => {
       try {
-        const res = await getDetailSurah(nomor);
-        setDetail(res.data);
+        const data = await getDetailSurah(nomor);
+        setDetail(data);
       } catch (err) {
         console.error(err);
       } finally {
         setLoading(false);
       }
     };
+    fetchDetail();
+  }, [nomor]); // Jalankan ulang jika nomor di URL berubah
 
-    fetchData();
-  }, [nomor]);
-
-  if (loading) return <p>Loading...</p>;
-  if (!detail) return <p>Data tidak ditemukan</p>;
+  if (loading) return <p>Memuat ayat...</p>;
 
   return (
-    <div>
-      <h1>{detail.namaLatin}</h1>
-      <p dangerouslySetInnerHTML={{ __html: detail.deskripsi }} />
+    <div style={{ padding: '20px' }}>
+    
+      <h1 style={{
+        marginBottom: '80px',
+        
+        }}><Link to="/">←</Link> {detail.namaLatin} ({detail.nama})</h1>
 
-      {/* 🎧 PILIH QARI */}
-      <div style={{ marginBottom: '20px' }}>
-        <label>Pilih Qari: </label>
-        <select value={qari} onChange={(e) => setQari(e.target.value)}>
+      {/* // bagian sini untuk memilih qari, dengan metode dropdown */}
+      <div style={{ marginBottom: '20px', display:'flex', flexDirection: 'column'}}>
+        <label style={{marginBottom: '10px'}}>Pilih Qari</label>
+        <select style={{background: 'rgba(98, 129, 65, 0.8)', padding: '5px', borderRadius: '8px', color:'white', borderColor:'rgba(98, 129, 65, 0.8)', width: '200px', margin:'auto' }} value={qari} onChange={(e) => setQari(e.target.value)}>
           <option value="01">Abdullah Al-Juhany</option>
           <option value="02">Abdul Muhsin Al-Qasim</option>
           <option value="03">Abdurrahman As-Sudais</option>
@@ -48,23 +49,24 @@ export default function SurahDetail() {
         </select>
       </div>
 
-      {/* 🎧 AUDIO FULL */}
+        {/* /disini untuk menambahkan file audio full surah, dengan qari yang dipilih */}
       <AudioPlayer audioUrl={detail.audioFull[qari]} />
+      
+      <div className='card-container-detail'>
+        {detail.ayat.map((item) => (
+        <div className='card-content-detail'
+          key={item.nomorAyat}>
+          <h3> {item.teksArab} <span style={{fontSize: '18px'}}>({item.nomorAyat})</span></h3>
+          <h2>{item.teksLatin}</h2>
+          <h4>{item.teksIndonesia}</h4>
 
-      <hr />
+          {/* 🔥 TAMBAHAN: AUDIO PER AYAT */}
+          <AyahAudio audioUrl={item.audio[qari]} />
 
-      {/* 📖 AYAT */}
-      {detail.ayat.map((ayat) => (
-        <div key={ayat.nomorAyat} style={{ marginBottom: '20px' }}>
-          <h3>Ayat {ayat.nomorAyat}</h3>
-          <p style={{ fontSize: '24px' }}>{ayat.teksArab}</p>
-          <p>{ayat.teksLatin}</p>
-          <p>{ayat.teksIndonesia}</p>
-
-          {/* 🎧 AUDIO PER AYAT */}
-          <AyahAudio audioUrl={ayat.audio[qari]} />
         </div>
-      ))}
+        ))}
+      </div>
+
     </div>
   );
 }
