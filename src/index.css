@@ -9,20 +9,8 @@
   color: var(--text);
   background: var(--bg);
 
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #F2F2F2;
-    --text-h: #628141;
-    --bg: #1B211A;
-    --border: #8BAE66;
-  }
-
-}
 
 body {
   margin: 0;
