@@ -9,7 +9,7 @@ export default function SurahDetail() {
   const [detail, setDetail] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // 🔥 TAMBAHAN (pilih qari)
+  // 🔥 TAMBAHAN (pilih qari) 
   const [qari, setQari] = useState("05");
 
   useEffect(() => {
@@ -37,9 +37,9 @@ export default function SurahDetail() {
         }}><Link to="/">←</Link> {detail.namaLatin} ({detail.nama})</h1>
 
       {/* // bagian sini untuk memilih qari, dengan metode dropdown */}
-      <div style={{ marginBottom: '20px', display:'flex', flexDirection: 'column'}}>
+      <div style={{ marginBottom: '20px', display:'flex', flexDirection:'column'}}>
         <label style={{marginBottom: '10px'}}>Pilih Qari</label>
-        <select style={{background: 'rgba(98, 129, 65, 0.8)', padding: '5px', borderRadius: '8px', color:'white', borderColor:'rgba(98, 129, 65, 0.8)', width: '200px', margin:'auto' }} value={qari} onChange={(e) => setQari(e.target.value)}>
+        <select style={{background: 'rgba(98, 129, 65, 0.8)', padding: '5px', borderRadius: '8px', color:'white', borderColor:'rgba(98, 129, 65, 0.8)', width: '200px', margin:'auto'}} value={qari} onChange={(e) => setQari(e.target.value)}>
           <option value="01">Abdullah Al-Juhany</option>
           <option value="02">Abdul Muhsin Al-Qasim</option>
           <option value="03">Abdurrahman As-Sudais</option>
