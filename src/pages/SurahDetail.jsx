@@ -31,10 +31,7 @@ export default function SurahDetail() {
   return (
     <div style={{ padding: '20px' }}>
     
-      <h1 style={{
-        marginBottom: '80px',
-        
-        }}><Link to="/">←</Link> {detail.namaLatin} ({detail.nama})</h1>
+      <h1 style={{marginBottom: '80px'}}><Link to="/quran-react2" style={{color:'rgba(98, 129, 65)', textDecoration:'none'}}> ← </Link> {detail.namaLatin} ({detail.nama})</h1>
 
       {/* // bagian sini untuk memilih qari, dengan metode dropdown */}
       <div style={{ marginBottom: '20px', display:'flex', flexDirection:'column'}}>

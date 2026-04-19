@@ -21,8 +21,7 @@ export default function QuranList() {
       }
     };
 
-    fetchSurah();
-  }, []);
+    fetchSurah()}, []);
 
   if (loading) return <p>Sedang memuat daftar surah...</p>;
   if (error) return <p style={{ color: 'red' }}>Error: {error}</p>;
@@ -56,14 +55,14 @@ export default function QuranList() {
           background: 'rgba(98, 129, 65, 0.2)',
           borderRadius: '8px',
           border: '1px solid #ccc'
-        }}
-      />
+        }}/>
+
+
       <h1 style={{marginBottom: '20px'}}>Daftar Surah</h1>
 
       <div className='card-container'>
         {filteredSurahs.map((surah) => (
-          <Link 
-            to={`/surat/${surah.nomor}`} 
+          <Link to={`/surat/${surah.nomor}`} 
             key={surah.nomor} 
             style={{ textDecoration: 'none', color: 'inherit' }}
           >

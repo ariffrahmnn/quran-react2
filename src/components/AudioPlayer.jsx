@@ -18,7 +18,7 @@ export default function AudioPlayer({ audioUrl }) {
       audioRef.current.pause();
       setIsPlaying(false);
     } else {
-      stopAllAudio(); // 🔥 INI KUNCINYA
+      stopAllAudio(); 
       audioRef.current.play();
       setIsPlaying(true);
     }
