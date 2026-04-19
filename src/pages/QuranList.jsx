@@ -49,9 +49,11 @@ export default function QuranList() {
         onChange={(e) => setSearch(e.target.value)}
         style={{
           padding: '10px',
-          width: '100%',
+          width: '85%',
           maxWidth: '400px',
           marginBottom: '30px',
+          marginLeft: 'auto',
+          marginRight: 'auto',
           background: 'rgba(98, 129, 65, 0.2)',
           borderRadius: '8px',
           border: '1px solid #ccc'
